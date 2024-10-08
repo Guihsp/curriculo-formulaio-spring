@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Currículo de [[${curriculo.nome}]]</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                padding: 10px;
+            }
+            h1, h2 {
+                color: #333;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            .section {
+                margin-bottom: 20px;
+                background-color: #f9f9f9;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            .section-title {
+                font-weight: bold;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>[[${curriculo.nome}]]</h1>
+
+        <div class="section">
+            <p>Nome: [[${curriculo.nome}]]</p>
+            <p>Endereço: [[${curriculo.endereco}]]</p>
+            <p>Telefone: [[${curriculo.telefone}]]</p>
+            <p>Email: [[${curriculo.email}]]</p>
+            <p>Profissão: [[${curriculo.profissao}]]</p>
+            <p>Resumo Profissional: [[${curriculo.resumo}]]</p>
+        </div>
+
+        <div class="section">
+            <h2>Tecnologias</h2>
+            <p>
+                <span th:each="tecnologia, iterStat : ${curriculo.tecnologias}">
+                    [[${tecnologia.nome}]]<span th:if="${!iterStat.last}">, </span>
+                </span>
+            </p>
+        </div>
+        <div class="section">
+            <h2>Formação Acadêmica</h2>
+            <ul>
+                <li th:each="formacao : ${curriculo.formacoes}" class="education-item">
+                    <h3>[[${formacao.curso}]]</h3>
+                    <p>Instituição: [[${formacao.instituicao}]]</p>
+                    <p>Período: [[${formacao.periodo}]]</p>
+                    <p>Descrição: [[${formacao.descricao}]]</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Experiências Profissionais</h2>
+            <ul th:each="experiencia : ${curriculo.experiencias}">
+                <li class="experience-item">
+                    <h3>[[${experiencia.cargo}]]</h3>
+                    <p>Empresa: [[${experiencia.empresa}]]</p>
+                    <p>Data de Início: [[${experiencia.dataInicio}]]</p>
+                    <p>Data de Fim: [[${experiencia.dataFim}]]</p>
+                    <p>Descrição: [[${experiencia.descricao}]]</p>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="section">
+            <h2>Idiomas</h2>
+            <p>
+                <span th:each="idioma, iterStat : ${curriculo.idiomas}">
+                    [[${idioma.nome}]] ([[${idioma.nivel}]])<span th:if="${!iterStat.last}">, </span>
+                </span>
+            </p>
+        </div>
+    </body>
+</html>
